@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  nifi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:  
+      - 8080:8080
+    volumes:
+      - ./cacerts.jks:/opt/nifi/nifi-current/conf/cacerts.jks
+    environment:
+      - SINGLE_USER_CREDENTIALS_USERNAME=admin
+      - SINGLE_USER_CREDENTIALS_PASSWORD=Welcome010101
+      - NIFI_WEB_HTTP_PORT=8080
+
+  nifi-registry:
+    image: apache/nifi-registry:1.15.1
+    ports:
+      - "18080:18080"
